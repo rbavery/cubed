@@ -91,7 +91,7 @@ def apply_blockwise(out_coords: List[int], *, config: BlockwiseSpec) -> None:
         args.append(arg)
 
     result = config.function(*args)
-    if isinstance(result, dict):  # structured array with named fields
+    if isinstance(result, dict):  # group of arrays with named fields
         for k, v in result.items():
             v = backend_array_to_numpy_array(v)
             config.write.open().set_basic_selection(out_chunk_key, v, fields=k)
